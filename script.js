@@ -5,7 +5,7 @@ const btn2Div = document.createElement("div");
 const btn2 = document.createElement("button");
 const todoApp = document.querySelector(".todo-app");
 // const divBtn2 = document.querySelector("hidden");
-button.onclick = function () {
+const generateLi = (button.onclick = function () {
   if (input.value === "" || input.value === " ") {
     alert("EHI! DEVI SCRIVERE QUALCOSA!");
   } else {
@@ -17,7 +17,7 @@ button.onclick = function () {
     li.appendChild(span);
   }
   input.value = "";
-};
+});
 
 listBox.addEventListener(
   "click",
@@ -28,11 +28,24 @@ listBox.addEventListener(
       btn2.innerText = "Cancella";
       btn2Div.className = "btn2";
       btn2Div.appendChild(btn2);
+      btn2.style.display = "block";
+
+      if (document.querySelectorAll("li")[0].classList == "checked") {
+        btn2.onclick = function () {
+          document.querySelectorAll(".checked")[0].remove();
+          btn2.style.display = "none";
+          if (document.querySelectorAll(".checked")[0].classList == "checked") {
+            while (!document.querySelectorAll("checked")[0]) {
+              document.querySelectorAll(".checked")[0].remove();
+            }
+          }
+        };
+      }
 
       todoApp.appendChild(btn2Div);
     } else if (e.target.tagName === "SPAN") {
       e.target.parentElement.remove();
-    //   e.target.closest("button").remove();
+      btn2.style.display = "none";
     }
   },
   false
@@ -40,13 +53,3 @@ listBox.addEventListener(
 
 const btnDelete = document.getElementById("");
 
-// listBox.onclick = function () {
-//   if (li.tagName === "LI") {
-//
-//     listBox.onclick = function () {
-//       li.className = "unchecked";
-//     };
-//   }  else if(span.tagName==="SPAN"){
-//     li.closest("li").remove();
-//   }
-// };
